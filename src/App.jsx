@@ -38,8 +38,12 @@ export default class App extends Component {
 
         }
       }
+    this.socket = new WebSocket('ws://localhost:3001/');
   }
   componentDidMount() {
+    this.socket.onopen = function() {
+      console.log('Connected to server');
+    }
 
     console.log("componentDidMount <App />");
     setTimeout(() => {
