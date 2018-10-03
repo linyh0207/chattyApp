@@ -22,7 +22,7 @@ export default class App extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.state = {
         data: {
-          currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+          currentUser: {name: "Angela"}, // optional. if currentUser is not defined, it means the user is Anonymous
           messages: [
             {
               id: generateRandomId(),
@@ -58,6 +58,9 @@ export default class App extends Component {
   }
 
   
+
+
+  
   handleKeyPress = evt => {
     let input = evt.target.value;
     if(evt.keyCode === 13){
@@ -69,7 +72,7 @@ export default class App extends Component {
       evt.target.value ="";
     }
   }
-                              
+                      
 
   render() {
 
