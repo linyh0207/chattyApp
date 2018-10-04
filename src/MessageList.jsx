@@ -5,7 +5,6 @@ import Notification from './notification.jsx';
 class MessageList extends Component {
   render() {
     var messageList = this.props.messages.map(message => {
-      console.log("MessageListSingleMessage", message)
       if(message.type === 'incomingNotification'){
         return <Notification key={message.id} singleNotice={message}/>
       } else {

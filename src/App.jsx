@@ -9,7 +9,8 @@ export default class App extends Component {
     this.state = {
         data: {
           currentUser: {name: "Anonymous"}, // optional. if currentUser is not defined, it means the user is Anonymous
-          messages: []
+          messages: [],
+          totalUsers: ""
         }
     };
     this.handleNewUserName = this.handleNewUserName.bind(this);
@@ -22,20 +23,38 @@ export default class App extends Component {
     this.socket.onopen = function() {
       console.log('Connected to server');
     }
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      this.socket.onmessage = this.handleMessage
-    }, 500)
   
+    this.socket.onmessage = this.handleMessage
+
   }
+
+
 
   handleMessage(event) {
     const newMessage = JSON.parse(event.data);
-    const messages = this.state.data.messages.concat(newMessage);
-    this.setState((prevState) => {
-      Object.assign(prevState.data, {messages})
-    });
-    console.log("handleMessage",this.state.data);
+    switch(newMessage.type){
+      case "incomingMessage":
+      case "incomingNotification":
+      let messages = this.state.data.messages.concat(newMessage);
+      this.setState((prevState) => {
+        Object.assign(prevState.data, {messages})
+      });
+      break;
+
+      case "userNumbers":
+      const totalNum = newMessage.totalUsers;
+      console.log(totalNum);
+      this.setState((prevState) => {
+        Object.assign(prevState.data, {totalUsers: totalNum})
+      });
+      break;
+    }
+
+    // const messages = this.state.data.messages.concat(newMessage);
+    // this.setState((prevState) => {
+    //   Object.assign(prevState.data, {messages})
+    // });
+    // console.log("handleMessage",this.state.data);
   }
 
   handleKeyPress = evt => {
@@ -58,12 +77,15 @@ export default class App extends Component {
       });
     }
   }
+
+ 
                       
   render() {
     return (
     <div>
     <nav className="navbar">
       <a href="/" className="navbar-brand">Chatty</a>
+      <div className="navbar-totalUser">{this.state.data.totalUsers} users online</div>
     </nav>
      <MessageList messages={this.state.data.messages}/>
     <ChatBar currentuser={this.state.data.currentUser.name} handleKeyPress={this.handleKeyPress} handleNewUserName={this.handleNewUserName}/>
