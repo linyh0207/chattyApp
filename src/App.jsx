@@ -35,6 +35,7 @@ export default class App extends Component {
     switch(newMessage.type){
       case "incomingMessage":
       case "incomingNotification":
+      case "incomingImg":
       let messages = this.state.data.messages.concat(newMessage);
       this.setState((prevState) => {
         Object.assign(prevState.data, {messages})

@@ -37,11 +37,30 @@ wss.on('connection', (ws) => {
   let jsonMessage = JSON.parse(message);
     switch(jsonMessage.type){
       case "postMessage":
+      console.log(jsonMessage.content);
+
+      if (jsonMessage.content[0] === '/'){
+        const parts = jsonMessage.content.split(' ');
+        console.log("parts", parts)
+        const cmd = parts[0].replace('/', '');
+        console.log("cmd", cmd)
+        switch (cmd){
+          case 'hamster':
+          let hamsterImg = "https://media.giphy.com/media/7oUdj7cAkXVfi/giphy.gif"
+          let sendImg = {type: 'incomingImg', id:uuid(), color: userColor, username: jsonMessage.username, content: hamsterImg}
+          console.log(sendImg);
+          wss.clients.forEach(function each(client) {
+            client.send(JSON.stringify(sendImg));
+          });
+        }
+      } else {
+
       let sendMsg = {type: 'incomingMessage', id:uuid(), color: userColor, username: jsonMessage.username, content: jsonMessage.content}
       console.log(sendMsg);
       wss.clients.forEach(function each(client) {
         client.send(JSON.stringify(sendMsg));
       });
+    }
       break;
 
       case "postNotification":
@@ -59,7 +78,7 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     wss.clients.forEach(function each(client) {
-      client.send(JSON.stringify({type: 'userNumbers', color: randomColor, totalUsers: wss.clients.size}))
+      client.send(JSON.stringify({type: 'userNumbers', totalUsers: wss.clients.size}))
       console.log('Client disconneted', wss.clients.size)
     });
   });
