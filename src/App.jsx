@@ -43,18 +43,14 @@ export default class App extends Component {
 
       case "userNumbers":
       const totalNum = newMessage.totalUsers;
-      console.log(totalNum);
+      const fontColor = newMessage.color;
+      console.log(fontColor);
       this.setState((prevState) => {
         Object.assign(prevState.data, {totalUsers: totalNum})
       });
+      console.log(this.state);
       break;
     }
-
-    // const messages = this.state.data.messages.concat(newMessage);
-    // this.setState((prevState) => {
-    //   Object.assign(prevState.data, {messages})
-    // });
-    // console.log("handleMessage",this.state.data);
   }
 
   handleKeyPress = evt => {
@@ -87,7 +83,7 @@ export default class App extends Component {
       <a href="/" className="navbar-brand">Chatty</a>
       <div className="navbar-totalUser">{this.state.data.totalUsers} users online</div>
     </nav>
-     <MessageList messages={this.state.data.messages}/>
+     <MessageList messages={this.state.data.messages} />
     <ChatBar currentuser={this.state.data.currentUser.name} handleKeyPress={this.handleKeyPress} handleNewUserName={this.handleNewUserName}/>
     </div>
     );
