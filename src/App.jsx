@@ -16,19 +16,14 @@ export default class App extends Component {
     this.handleNewUserName = this.handleNewUserName.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
-    
   }
  
   componentDidMount() {
     this.socket.onopen = function() {
       console.log('Connected to server');
     }
-  
     this.socket.onmessage = this.handleMessage
-
   }
-
-
 
   handleMessage(event) {
     const newMessage = JSON.parse(event.data);
@@ -44,12 +39,9 @@ export default class App extends Component {
 
       case "userNumbers":
       const totalNum = newMessage.totalUsers;
-      const fontColor = newMessage.color;
-      console.log(fontColor);
       this.setState((prevState) => {
         Object.assign(prevState.data, {totalUsers: totalNum})
       });
-      console.log(this.state);
       break;
     }
   }
@@ -57,7 +49,7 @@ export default class App extends Component {
   handleKeyPress = evt => {
     let input = evt.target.value;
     if(evt.keyCode === 13){
-      var jsonPost = JSON.stringify ({type: 'postMessage', username: this.state.data.currentUser.name, content: input});
+      let jsonPost = JSON.stringify ({type: 'postMessage', username: this.state.data.currentUser.name, content: input});
       this.socket.send(jsonPost);
       evt.target.value ="";
     }
@@ -68,14 +60,11 @@ export default class App extends Component {
       let newName = evt.target.value;
       let jsonNotice = JSON.stringify ({type: 'postNotification', content: `${this.state.data.currentUser.name} has changed their name to ${newName}`});
       this.socket.send(jsonNotice);
-      console.log(jsonNotice);
       this.setState((prevState) => {
         Object.assign(prevState.data.currentUser, {name: newName})
       });
     }
   }
-
- 
                       
   render() {
     return (

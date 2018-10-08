@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class ChatBar extends Component {
   render() {
-    
     return (
     <footer className="chatbar">
       <input onKeyUp={this.props.handleNewUserName}className="chatbar-username" defaultValue={this.props.currentuser} placeholder="Type a name and hit ENTER" />

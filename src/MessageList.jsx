@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
-import Notification from './notification.jsx';
-import Img from './img.jsx';
+import Notification from './Notification.jsx';
+import Img from './Img.jsx';
 
 class MessageList extends Component {
   render() {
     var messageList = this.props.messages.map(message => {
-      console.log("singleMessage",message)
       switch(message.type){
         case 'incomingNotification':
         return <Notification key={message.id} singleNotice={message}/>
@@ -20,14 +19,6 @@ class MessageList extends Component {
         return <Img key={message.id} singleImg={message}/>
         break;
       }
-
-
-
-      // if(message.type === 'incomingNotification'){
-      //   return <Notification key={message.id} singleNotice={message}/>
-      // } else {
-      // return <Message key={message.id} singleMessage={message}/>
-      // }
     });
     return (
       <main className="messages">
