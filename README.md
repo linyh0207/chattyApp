@@ -5,6 +5,7 @@ Chatty will allow users to communicate with each other without having to registe
 ## Screenshots
 
 !["Screenshots of chatty messages"](https://i.gyazo.com/fd7b401e37864cb3e3c9af3d596577d8.gif)
+!["Screenshots of chatty messages2"](https://i.gyazo.com/7e1ea25d3e7b235945fa7630374f8710.gif)
 
 React Boilerplate
 =====================
