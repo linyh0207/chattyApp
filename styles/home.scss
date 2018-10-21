@@ -10,8 +10,8 @@ body {
 }
 
 .chatbar {
-  background: tomato;
-  border-top: 1px solid black;
+  background: #cc898c;
+  border-top: 1px solid #35281e;
   bottom: 0;
   display: flex;
   left: 0;
@@ -22,7 +22,7 @@ body {
 
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
+  border: 1px solid #35281e;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -60,7 +60,11 @@ body {
 }
 
 .img-content {
-  width: 60%;
+  flex: 8;
+}
+
+.img-content img {
+  width: 10%;
   flex: 8;
   height: auto;
 }
@@ -71,14 +75,15 @@ body {
 }
 
 .navbar {
-  background: tomato;
-  border-bottom: 1px solid black;
+  background: #cc898c;
+  border: 2px solid #35281e;
   height: 60px;
   left: 0;
   padding: 0 10px;
   position: fixed;
   right: 0;
   top: 0;
+  color: white;
 }
 
 .navbar-brand {
@@ -99,7 +104,9 @@ body {
 }
 
 .notification {
-  margin: 5px;
+  margin: 10px;
+  font-style: italic;
   padding: 0 10px;
+  color: #A9A9A9;
 }
 

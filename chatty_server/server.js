@@ -20,7 +20,7 @@ const wss = new SocketServer({ server });
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-  const colors = ['red', 'green', 'blue', 'orange'];
+  const colors = ['#CD5C5C', '#9DC183', '#E0CC77', '#5F4B8B'];
   const userColor  = colors[Math.floor(Math.random() * colors.length)]
 
   //Broadcast the updated total clients numbers when a new client connected
